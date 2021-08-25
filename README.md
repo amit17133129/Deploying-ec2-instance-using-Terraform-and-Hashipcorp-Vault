@@ -1,5 +1,10 @@
 # Deploying-ec2-instance-using-Terrfaorm-and-Hashipcorp-Vault
 
+
+<p align="center">
+  <img width="1000" height="600" src="https://cdn.dribbble.com/users/7789/screenshots/5425943/vault-loader-dark.gif">
+</p>
+
 # What is Hashicorp Vault ?
 
 HashiCorp Vault is a secrets management tool specifically designed to control access to sensitive credentials in a low-trust environment. It can be used to store sensitive values and at the same time dynamically generate access for specific services/applications on lease.
