@@ -405,3 +405,12 @@ The code for creating ec2 instance is mentioned above.
   <img width="1000" height="150" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/my%20terraform%20os.jpg?raw=true">
 </p>
 
+<p align="center">
+  <img width="1000" height="100" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/hello%20terraform.jpg?raw=true">
+</p>
+
+## List terraform resources
+
+<p align="center">
+  <img width="1000" height="250" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/terraform%20state%20list.jpg?raw=true">
+</p>
