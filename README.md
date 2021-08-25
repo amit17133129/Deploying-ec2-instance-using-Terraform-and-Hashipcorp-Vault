@@ -276,6 +276,71 @@ Vault UI has a built-in tutorial to navigate you through the common steps to ope
 
 Now we have to launch the vault which will use aws access key and secret key. Using aws access key and secret key vault will dynamically create new access key and secret key for particular resources and this keys are valid for certain period of time.
 
+
+```
+---------------------vault.tf---------------------------
+provider "vault" {
+ address = "${var.vault_addr}"
+ token = "${var.vault_token}"
+}
+resource "vault_aws_secret_backend" "aws" {
+  access_key = "${var.access_key}"
+  secret_key = "${var.secret_key}"
+  region = "us-east-2"
+  default_lease_ttl_seconds = "120"
+  max_lease_ttl_seconds     = "240"
+}
+resource "vault_aws_secret_backend_role" "ec2-admin" {
+  backend = "${vault_aws_secret_backend.aws.path}"
+  name    = "ec2-admin-role"
+  credential_type = "iam_user"
+policy_document = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:*", "ec2:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+```
+
+```
+---------------------vault_variables.tf---------------------------
+variable "vault_addr" {
+ default = "http://public_ip:8200"
+}
+variable "vault_token" {
+ default = "xxxxxxxxxxxxxxxxxxxxx"
+}
+variable "access_key" {
+ default = "xxxxxxxxxxxxxxxxxxxxx"
+}
+
+variable "secret_key" {
+ default = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+
+
+```
+
+```
+---------------------backend.tf---------------------------
+terraform {
+  backend "s3" {
+    bucket = "terraformbackend1"
+    key    = "dev/terraform.tfstate"
+    region = "ap-south-1"
+  }
+}
+```
+
 <p align="center">
   <img width="1000" height="475" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/new%20all%20code.jpg?raw=true">
 </p>
