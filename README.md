@@ -13,6 +13,7 @@ Here i am using Amazon linux 2 image to setup vault
 <p align="center">
   <img width="1000" height="100" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/ec2-instance.jpg?raw=true">
 </p>
+
 ## Step 1: Download Vault
 Precompiled Vault binaries are available for download at https://releases.hashicorp.com/vault/ and Vault Enterprise binaries are available for download by following the instructions made available to HashiCorp Vault customers.
 
