@@ -198,3 +198,84 @@ container.
 2020-09-20T19:55:29.519-0700 [INFO]  proxy environment: http_proxy= https_proxy= no_proxy=
 ```
 
+<p align="center">
+  <img width="1000" height="400" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/vault%20running%20info.jpg?raw=true">
+</p>
+
+Launch a web browser, and enter `http://public_ip:8200/ui` in the address.
+
+The Vault server is uninitialized and sealed. Before continuing, the server's storage backend requires starting a cluster or joining a cluster.
+
+Select Create a new Raft cluster and click Next.
+
+<p align="center">
+  <img width="1000" height="400" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/vault%20webui.jpg?raw=true">
+</p>
+Enter `5` in the Key shares and `3` in the Key threshold text fields.
+
+<p align="center">
+  <img width="1000" height="475" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/initialize%20vault.jpg?raw=true">
+</p>
+
+Click `Initialize`.
+
+When the unseal keys are presented, scroll down to the bottom and select Download key. Save the generated unseal keys file to your computer.
+
+<p align="center">
+  <img width="1000" height="500" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/download%20keys.jpg?raw=true">
+</p>
+
+The unseal process requires these keys and the access requires the root token.
+
+Click Continue to Unseal to proceed.
+
+Open the downloaded file.
+
+Example key file:
+```
+{
+  "keys": [
+    "ecfb4ef59f9a2570f856c471cd3b0580e2b7d99962d5c9af7a25b80138affe935a",
+    "807e9bbfb984c631becc526c621c9852f82d88b2347f7398ef7af3c1fbfbbe9fd0",
+    "561a7ff6b44b88f96a2d9faca1ae514d1557008ce19283dcfe2fb746ed4f0f7d94",
+    "3671e9e817177d79d3c004e0745e5f1d1a5cbfcd9fd6ad22505d4bc538176fa3f9",
+    "313fffc1c848276fffe1e3fcfce4d3472d104cda466227ca155e4f693cfbaa36b9"
+  ],
+  "keys_base64": [
+    "7PtO9Z+aJXD4VsRxzTsFgOK32Zli1cmveiW4ATiv/pNa",
+    "gH6bv7mExjG+zFJsYhyYUvgtiLI0f3OY73rzwfv7vp/Q",
+    "Vhp/9rRLiPlqLZ+soa5RTRVXAIzhkoPc/i+3Ru1PD32U",
+    "NnHp6BcXfXnTwATgdF5fHRpcv82f1q0iUF1LxTgXb6P5",
+    "MT//wchIJ2//4eP8/OTTRy0QTNpGYifKFV5PaTz7qja5"
+  ],
+  "root_token": "s.p3L38qZwmnHUgIHR1MBmACfd"
+}
+```
+Copy one of the keys (not keys_base64) and enter it in the Master Key Portion field. Click Unseal to proceed.
+
+<p align="center">
+  <img width="1000" height="500" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/unsealing%20vault.jpg?raw=true">
+</p>
+
+<p align="center">
+  <img width="1000" height="475" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/provided%202.jpg?raw=true">
+</p>
+
+The Unseal status shows 1/3 keys provided. Enter another key and click Unseal. The Unseal status shows 2/3 keys provided. Enter another key and click Unseal. After 3 out of 5 unseal keys are entered, Vault is unsealed and is ready to operate. Copy the root_token and enter its value in the Token field. `Click Sign in`.
+
+<p align="center">
+  <img width="1000" height="475" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/root%20token.jpg?raw=true">
+</p>
+
+## Web UI Wizard
+Vault UI has a built-in tutorial to navigate you through the common steps to operate various Vault features.
+
+<p align="center">
+  <img width="1000" height="475" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/first%20screen.jpg?raw=true">
+</p>
+
+Now we have to launch the vault which will use aws access key and secret key. Using aws access key and secret key vault will dynamically create new access key and secret key for particular resources and this keys are valid for certain period of time.
+
+<p align="center">
+  <img width="1000" height="475" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/new%20all%20code.jpg?raw=true">
+</p>
