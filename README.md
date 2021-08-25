@@ -4,6 +4,10 @@
 
 HashiCorp Vault is a secrets management tool specifically designed to control access to sensitive credentials in a low-trust environment. It can be used to store sensitive values and at the same time dynamically generate access for specific services/applications on lease.
 
+Here i am using Amazon linux 2 image to setup vault 
+<p align="center">
+  <img width="1000" height="100" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/ec2-instance.jpg?raw=true">
+</p>
 ## Step 1: Download Vault
 Precompiled Vault binaries are available for download at https://releases.hashicorp.com/vault/ and Vault Enterprise binaries are available for download by following the instructions made available to HashiCorp Vault customers.
 
@@ -330,6 +334,21 @@ variable "secret_key" {
 
 ```
 
+## S3 Backend
+Here i am using backend from s3. So as soona s terraform.tfstate file creates then it will automatically stores in s3 bucket.
+
+<p align="center">
+  <img width="1000" height="300" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/s3.jpg?raw=true">
+</p>
+
+<p align="center">
+  <img width="1000" height="300" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/dev.jpg?raw=true">
+</p>
+
+<p align="center">
+  <img width="1000" height="300" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/tfstate%20file.jpg?raw=true">
+</p>
+
 ```
 ---------------------backend.tf---------------------------
 terraform {
@@ -341,6 +360,48 @@ terraform {
 }
 ```
 
+## Terraform Init
 <p align="center">
   <img width="1000" height="475" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/new%20all%20code.jpg?raw=true">
 </p>
+
+## Terraform Apply
+<p align="center">
+  <img width="1000" height="475" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/vault%20terrfaorm%20apply.jpg?raw=true">
+</p>
+
+After running terraform code successfully navigate to vaut dashboard. You will find that aws credentials automatically created with previous access and secret key.
+
+<p align="center">
+  <img width="1000" height="300" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/aws%20vault.jpg?raw=true">
+</p>
+
+Click to aws and you will find that you have created ec2-admin role as you can see below.
+
+<p align="center">
+  <img width="1000" height="300" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/ec2_admin_role.jpg?raw=true">
+</p>
+
+Now you can use this role to create your respective resources.
+So now i will create an ec2 instance with below respective infra.
+1. VPC
+2. Subnets
+3. Internet Gateway
+4. Routing Table
+5. Security Groups
+6. Keypairs
+7. Ec2 Instance
+
+```
+Note: After creating a aws vault then only you have to run the terrfaorm code for ec2 instance
+```
+The code for creating ec2 instance is mentioned above.
+
+<p align="center">
+  <img width="1000" height="450" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/ec2%20instance%20launch.jpg?raw=true">
+</p>
+
+<p align="center">
+  <img width="1000" height="150" src="https://github.com/amit17133129/Deploying-ec2-instance-using-Terraform-and-Hashipcorp-Vault/blob/main/images/my%20terraform%20os.jpg?raw=true">
+</p>
+
