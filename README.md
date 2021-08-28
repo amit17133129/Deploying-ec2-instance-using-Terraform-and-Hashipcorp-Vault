@@ -1,4 +1,4 @@
-# Deploying-ec2-instance-using-Terrfaorm-and-Hashipcorp-Vault
+# Deploying-ec2-instance-using-Terrfaorm-and-Hashicorp-Vault
 
 
 <p align="center">
